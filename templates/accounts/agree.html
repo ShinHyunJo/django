@@ -1,0 +1,56 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block title %}회원가입 : 약관동의{% endblock %}
+
+{% block style %}
+    <style>
+    a:link {
+        color: white;
+        text-decoration: none;
+    }
+    a:hover {
+        color: #bbe309 ;
+    }
+    </style>
+
+
+{% endblock %}
+
+{% block content %}
+<div id="main">
+<div class="container">
+        <div class="row mb-5 d-flex" style="height: 150px"></div>
+            <div class="col-3">
+                <div><h2 class="fw-bold text-light">findThejoeunMovie</h2></div>
+                <div class="mt-4 text-light"><h5>● 이용약관 동의</h5></div>
+                <div class="mt-4 text-white-50"><h5>● 정보입력</h5></div>
+                <div class="mt-4 text-white-50"><h5>● 가입완료</h5></div>
+            </div>
+            <div class="col-3">
+                <div class="card card-body border-0 mx-5" style="background: #0E0E0E;">
+                    <h5 style="color: #bbe309">사이트 이용약관</h5>
+                    <div>
+                        <textarea rows="10" class="form-control">
+                            약관에 동의하시겠습니까?
+                        </textarea>
+                    </div>
+                    <div class="text-center">
+                        <form>
+                        <input type="checkbox" class="form-check-input border-success" id="agree1" name="agree1">
+                        <label class="form-check-label text-secondary fw-bold" for="agree"> 이용약관에 동의합니다.</label>
+                        </form>
+                    </div>
+                    <div class="text-center p-5">
+                    <button type="button" id="okagree" class="btn m-1 text-dark" style="background: #bbe309; border: #bbe309" ><i class="bi bi-check"></i>모두 동의합니다</button>  <!-- data-bs-dismiss="modal" 창 끄는거임 -->
+                 </div>
+                </div>
+            </div>
+        </div>
+
+</div>
+</div>
+{% endblock %}
+
+{% block script%}
+{% endblock %}

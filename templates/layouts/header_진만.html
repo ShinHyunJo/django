@@ -1,0 +1,52 @@
+{% load static %}
+{% block style %}
+{% endblock %}
+<nav class="col-lg-10 navbar navbar-expand-lg navbar-dark" style="background-color: #2B2B37">
+    <div class="container-fluid">
+        <a class="navbar-brand col-3 text-end" href="{% url 'home' %}"><img src="{% static 'imgs/logo.gif' %}"></a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item col-2">
+                    <a class="nav-link active" aria-current="page" href="{% url 'movies' 0 %}">movies</a>
+                </li>
+                <li class="nav-item col-6">
+                    <a class="nav-link fw-bold fs-5 ps-3" style="color: #bbe309;" href="{% url 'reco_movie' %}">FIND YOUR MOVIE</a>
+                </li>
+                <li class="nav-item col-3">
+                    <a class="nav-link active" aria-current="page" href="{% url 'clist' %}">community</a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item col-1 ps-1">
+                        <a class="nav-link active" aria-current="page" href="{% url 'profile' %}">profile</a>
+                    </li>
+                    <li class="nav-item col-1 ps-1">
+                        <button class="btn btn-light ps-4 pe-4 text-black" type="submit" name ="logout">Logout</button>
+                    </li>
+                {% endif%}
+            </ul>
+            <ul class="d-flex mb-lg-0 col-1 ps-1">
+                {% if user.is_authenticated == False %}
+                    <li class="nav-item navbar-nav me-auto mb-2 mb-lg-0">
+                        <a class="nav-link active" aria-current="page" href="{% url 'signup' %}">sign-up</a>
+                    </li>
+                    <li class="nav-item col-1 ps-1">
+                        <button class="btn btn-light ps-4 pe-4 text-white" style="background: #2B2B37;" data-bs-toggle="modal" data-bs-target="#loginmodal" type="button">Login</button>
+                    </li>
+                {% endif%}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="d-flex justify-content-center">
+    <div class="mt-4 mb-0 col-6" id="search">
+        <form class="form-inline my-2 my-lg-0 ml-3" action="" >
+            <div class="input-group">
+                <input class="form-control mr-sm-2 me-2 text-light fs-5" style="background-color: #2B2B37; border: #2B2B37;" type="search" placeholder="키워드를 입력해주세요" aria-label="Search" name="message">
+                <button class="btn text-white fs-5 me-1 my-2 my-sm-0 input-group-addon" type="submit" style="border: none"><i class="bi bi-search"></i></button>
+            </div>
+        </form>
+        <hr class="text-light mt-0">
+    </div>
+</div><!-- 서치 -->
+

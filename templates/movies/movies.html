@@ -1,0 +1,152 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %}영화 소개 리스트{% endblock %}
+{% block style %}
+    <style>
+        /* 영화 정렬 셀렉터 */
+        .l_order {
+            text-decoration: none;
+            min-width: 59px;
+            height: 40px;
+            padding: 4px 17px 4px 17px;
+            border: 1px solid #fff;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 42px;
+            background-color: #2B2B37;
+            color: #fff;
+            -webkit-transition: all .2s ease-out;
+            transition: all .2s ease-out; }
+
+        .l_order:hover {
+            text-decoration: none;
+            border-color: #bbe309;
+            background-color: #bbe309;
+            color: #2B2B37;
+            font-weight: bold; }
+
+
+        /* 무비카드 */
+
+        .card {
+            position: relative;
+            z-index: 20;
+        }
+
+        .like {
+            position: relative;
+            display: inline-block;
+            text-align: center;
+            top: -200px;
+            z-index: 30;
+            pointer-events: none;
+        }
+        .card-title {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            -webkit-line-clamp: 1;
+        }
+
+        .card-img-top {
+            object-fit: cover;
+            width: 100%;
+            height: 430px;
+        }
+
+        .card-body { height: 150px }
+
+    </style>
+
+{% endblock %}
+
+{% block content %}
+<div id="main">
+<div class="container">
+    <!-- <div class="text-light">
+        <ul class="trailer_btn">
+            <li><button type="button"><img src="imgs/1.jpg"></button></li>
+            <li><button type="button"><img src="imgs/2.jpg"></button></li>
+            <li><button type="button"><img src="imgs/3.jpg"></button></li>
+            <li><button type="button"><img src="imgs/4.jpg"></button></li>
+        </ul></div>
+    일단 안함-->
+
+    <span id="hz"></span><br>
+    <div class="row mt-5">
+        <div class="col-lg-4 text-lg-right">
+            <ul class="fw-bold">
+                <li><a href="{% url 'movies:movies' 1 %}" class="l_order" id="a1">최신순</a></li>
+                <li><a href="{% url 'movies:movies' 2 %}" class="l_order">인기순</a></li>
+                <li><a href="{% url 'movies:movies' 3 %}" class="l_order">제목순</a></li>
+                <li><a href="{% url 'movies:movies' 4 %}" class="l_order">평점순</a></li>
+            </ul>
+        </div> <!-- 셀렉터 -->
+    </div>
+
+    <div class="row">
+        <!-- for 문 시작 -->
+        {% for movie in movies %}
+        <div class="col-sm-3">
+            <div class="card card-color" style="width: 18rem; background: #2B2B37; border: #2B2B37">
+{#                {% if  %}#}
+                <a href="{% url 'movies:minfo' movie.pk %}"><img src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}"
+                                                                 alt="{{ movie.title }}_poster" class="card-img-top rounded"></a>
+                <div class="card-body p-0 mt-2 mb-4">
+                    <h5 class="card-title fw-bold text-white">{{ movie.title }}</h5>
+
+                    <p class="card-text text-white"> 장르 :
+                        {% for genre in genres %}
+                            {% for mgenre in mgenres %}
+                                {% if movie.id == genre.movie_id %}
+                                    {% if genre.genre_id == mgenre.id %}{{ mgenre.name }}
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}</p>
+                    <a href="{% url 'movies:minfo' movie.pk %}" class="btn btn-outline-light">자세히보기</a>
+                </div>
+{#                {% endif %}#}
+            </div>
+            <!-- <div class="like d-flex justify-content-end pe-4">
+                <button class="btn text-white fs-5 me-1 my-2 my-sm-0 input-group-addon" style="border: none" type="submit">
+                <i class="bi bi-heart text-white fs-2 fw-bold"></i>
+                </button>
+            </div> -->
+        </div> <!-- 무비카드 -->
+        {% endfor %}
+        <!-- for문 끝 -->
+    </div>
+
+    </div>  <!-- container -->
+</div><!-- main  -->
+{% endblock %}
+
+{% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://unpkg.com/youtube-background@1.0.14/jquery.youtube-background.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('[data-vbg]').youtube_background(); // 실행
+  });
+</script>
+<script>
+
+//function change() {
+//    var hz = document.getElementById('hz');
+//    var a1 = document.getElementById('a1');
+//
+//    hz.innerText="최신 영화 목록입니다.";
+// }
+// onclick 이벤트 만들다가 실패.. 나중에 다시
+// (a태그는 onclick이 잘 안먹는다. 버튼은 잘먹는데... 그렇다고 버튼으로 바꾸면 디자인이 이상해짐)
+
+//var hz = document.getElementById('hz');
+//const a1 = document.querySelector('#a1');
+//    a1.addEventListener('click', () => {
+//        hz.innerText = "최신 영화 목록입니다.";
+//    });
+
+</script>
+{% endblock %}

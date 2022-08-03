@@ -1,0 +1,67 @@
+{% load static %}
+{% block style %}
+{% endblock %}
+<div class="container">
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #2B2B37">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'imgs/logo.gif' %}"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'movies:movies' 0 %}">Movies</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active fw-bold" style="color: #bbe309;" href="{% url 'movies:reco_movie' %}">FIND YOUR MOVIE</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="{% url 'clist' %}">Community</a>
+        </li>
+        {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link active" href="{% url 'profile' %}">Mypage</a>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link disabled" href="{% url 'signup' %}">JoinUs</a>
+            </li> -->
+        {% else %}
+            <!-- <li class="nav-item">
+              <a class="nav-link disabled" href="{% url 'profile' %}">Mypage</a>
+            </li>-->
+            <li class="nav-item">
+              <a class="nav-link active" href="{% url 'signup' %}">JoinUs</a>
+            </li>
+        {% endif %}
+      </ul>
+
+      <ul class="d-flex">
+      {% csrf_token %}
+      {% if user.is_authenticated %}
+          <form name="prflfrm" method="post" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button class="btn btn-light ps-4 pe-4 text-white" style="background: #2B2B37;" type="submit" id="lgtbtn" name="lgtbtn">Logout</button>
+          </form>
+      {% else %}
+          <button class="btn btn-light ps-4 pe-4 text-white" style="background: #2B2B37;" data-bs-toggle="modal" data-bs-target="#loginmodal" type="button">Login</button>
+      {% endif %}
+      </ul>
+
+    </div>
+  </div>
+</nav>
+</div>
+
+<div class="d-flex justify-content-center">
+    <div class="mt-4 mb-0 col-6" id="search">
+        <form method="get" class="form-inline my-2 my-lg-0 ml-3" action="{% url 'movies:movie_search' %}" >
+            <div class="input-group">
+                <input class="form-control mr-sm-2 me-2 text-light fs-5" style="background-color: #2B2B37; border: #2B2B37;" type="search" placeholder="키워드를 입력해주세요" aria-label="Search" name="message">
+                <button class="btn text-white fs-5 me-1 my-2 my-sm-0 input-group-addon" type="submit" style="border: none"><i class="bi bi-search"></i></button>
+            </div>
+        </form>
+        <hr class="text-light mt-0">
+    </div>
+</div><!-- 서치 -->

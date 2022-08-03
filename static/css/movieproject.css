@@ -1,0 +1,9 @@
+body { background: #2B2B37; }
+form { display: inline; }
+body::-webkit-scrollbar { width: 0; overflow-y: scroll; overflow-x: hidden; }
+#wrapper { height: auto; min-height: calc(100vh - 70px); }
+header { height: 172px; }
+#search { align-items: center; }
+ul { list-style: none; padding: 0 }
+ul li { display: inline-block; }
+footer { height: 70px; position: relative; background: #0E0E0E;}

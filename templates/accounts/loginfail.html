@@ -1,0 +1,24 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block title %}{% endblock %}
+
+{% block style %}{% endblock %}
+
+{% block content %}
+<div id="main">
+    <div>
+        <div class="text-center">
+            <i class="bi bi-x-circle-fill text-danger" style="font-size: 8rem"></i>
+            <div class="display-2 text-black-50"><span class="fw-bold text-black">로그인</span> 실패!</div>
+            <div class="text-black-50 fs-5 mt-4">아이디 비밀번호를 다시한번 확인하세요</div>
+        </div><!-- message -->
+        <div class="text-center mb-3">
+            <button type="button" class="btn btn-primary"><i class="bi bi-hand-index"></i>메인페이지로 이동하기</button>
+        </div><!-- button -->
+    </div>
+</div> <!-- main -->
+{% endblock %}
+
+{% block script%}
+{% endblock %}

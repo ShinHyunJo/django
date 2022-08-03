@@ -1,0 +1,215 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %}리뷰작성{% endblock %}
+{% block style %}
+    <style>
+        /* input[type="checkbox"] {
+            width: 1rem;
+            height: 1rem;
+            border: 1px solid #999;
+            background: #999;
+            appearance: none;
+            cursor: pointer;
+            transition: background 0.2s;
+          }
+
+        input[type="checkbox"]:checked {
+            background: #bbe309;
+            border: none;
+          } */
+        
+    </style>
+{% endblock %}
+{% block content %}
+<div id="main">
+    <div class="container">
+        <div class="text-light mb-0"><h4>community</h4></div>
+        <hr class="text-light mb-1">
+        <div class="text-light fs-4 mt-4 d-flex justify-content-center">리뷰쓰기</div>
+        <div class="d-flex justify-content-center"><hr class="text-light mt-2 mb-0 col-8"></div>
+    </div>
+    <div class="row">
+        <form name="mtfrm" method="post">
+                <div class="mt-3">
+                    <label for="title" class="text-light col-3 text-end">제목</label>
+                    <input type="text" name="title" id="title1" style="width:50%; min-width:350px; max-width: 700px; border-radius: 4px; border: none; ">
+                </div> <!-- 글제목 -->
+
+                <div class="mt-3">
+                    <label for="title" class="text-light col-3 text-end">영화</label>
+                    <input type="text" name="title" id="movie_title1" disabled style="min-width:240px; border-radius: 4px; border: none; background-color: darkgray; color: black">
+                    <button type="button" style="max-width: 100px; min-width: 100px; background-color: #bbe309;
+                            border-radius: 4px; border: none; font-weight: bold" data-bs-toggle="modal" data-bs-target="#fmmodal">
+                        <i class="bi bi-search"></i>영화 찾기</button>
+                </div> <!-- 영화찾기 -->
+                <input type="hidden" name="id" >  <!--무슨 기능을 하는거지??/-->
+        </form>
+    <div id="fmmodal" aria-hidden="true" class="modal" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" style="background: #2B2B37;">
+                <div class="modal-body">
+                    <div class="d-flex justify-content-end">
+                    <button type="button" data-bs-dismiss="modal" class="btn btn-dark"
+                            style="background: #2B2B37; border: none"><i class="bi bi-x fs-4"></i></button>
+                    </div>
+                </div>
+
+                <div class="row d-flex justify-content-center">
+                    <form name="mtfrm1">
+
+                        <div class="row">
+                            <div class="col-sm-12 text-center fs-5"
+                                 style="color: #bbe309; ">영화제목을 입력하신 후, [검색하기] 버튼을 클릭하세요
+                            </div>
+                        </div>
+
+                        <div class="row mt-3 d-flex justify-content-center">
+
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-8">
+                                <input type="text" id="title"
+                                       name="title" class="form-control">
+                            </div>
+                            <div class="col-sm-3">
+                                <button type="button" class="btn border-light text-light" id="fmbtn"
+                                        style="background: #2B2B37"><i class="bi bi-search"></i> 검색하기</button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-10 ms-3">
+                                <hr style="border: 0">
+                                <select id="movielist" name="movielist" size="10" class="form-select ms-5">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="mt-5 mb-5 text-center">
+                            <button type="button" id="sendbtn" class="btn fw-bold col-sm-8" style="background: #bbe309; border: #bbe309;" >선택하고 닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <label for="contents" class="text-light col-3 text-end" style="vertical-align: top">내용</label>
+        <textarea type="text" name="contents" id="contents" rows="12" style="width:50%; min-width:350px; max-width: 700px; border-radius: 4px; border: none; resize: none" ></textarea>
+    </div> <!-- 리뷰본문 -->
+
+    <div class="mt-3">
+        <div class="d-flex justify-content-center">
+            <hr class="text-light mt-2 mb-0 col-8">
+        </div>
+        <div class="d-flex justify-content-center">
+            <div class="col-8 d-flex justify-content-between mt-3">
+                <div>
+                    <button type="button" id="backbtn" style="max-width: 100px; min-width: 100px; background-color: #bbe309;
+                    border-radius: 4px; border: none; font-weight: bold ">뒤로가기</button>
+                </div>
+                <div>
+                    <button type="button" id="submitbtn" style="max-width: 100px; min-width: 100px; background-color: #bbe309; border-radius: 4px; border: none; font-weight: bold ">등록</button>
+                </div>
+            </div>
+        </div>
+    </div> <!-- 뒤로등록버튼 -->
+</div>
+<!-- container  -->
+</div><!-- 메인 -->
+<!--    <div class="text-light" style="margin-top: 10px;">
+        <label for="spoiler" class="col-3"></label>
+        <input type="checkbox" name="spoiler" id="spoiler"
+            style="border-radius: 4px; vertical-align: -2px; ">
+        <label style="; text-align: left">내용에 스포일러가 있습니다</label>
+</div>  -->
+
+
+
+{% endblock %}
+
+{% block script%}
+    <!--
+    fmbtn: 모달 내 영화 찾기 버튼
+    sendbtn : 모달 내 영화 선택확인 버튼
+    movie_title : 영화제목
+    addlist : 영화 제목 검색 결과들
+
+    -->
+ <script>
+    const fmbtn = document.querySelector('#fmbtn');
+    const sendbtn = document.querySelector('#sendbtn');
+    const title = document.querySelector('#title');
+    const movielist = document.querySelector('#movielist');
+
+    fmbtn.addEventListener('click', () => {
+        let qry = '?title=' + title.value;
+        fetch('{% url 'movie' %}' + qry)
+        {# 인터넷 주소창의 주소와 같다 볼 수 있음 movies_movie?title=영화제목#}
+            .then(response => response.text())
+            .then(text => setMovies_movie(text));
+    });
+
+    const setMovies_movie = (titles)=>{   {# titles로 함수 정의#}
+        titles = JSON.parse(titles);
+
+    let opts = '';
+    let vals = '';
+    let id = '';
+
+
+    titles.forEach((data, idx) => {
+        //console.log(data, idx);
+        //console.log(data.fields);
+        // <option>값<option> : selected => 값
+        // <option value='abc'>값</option> : selected => abc
+        vals = data.fields.title + '&nbsp;' ;
+        vals += data.fields.release_date + '&nbsp;' ;
+        id = '&nbsp;' + data.pk;
+
+{#.value = titles[3].split('-')[0] #}
+
+{% comment %}
+#{}
+파라미터가 String 형태로 넘어온 후 그 값에 ' '이 붙어 출력된다.
+SQL Injection이 들어올 경우 ' '으로 인해 쿼리문으로 인식하지 않아 보안에 유리하다.
+${}
+파라미터가 해당 컬럼의 자료형에 맞춰진 형태로 출력된다.
+SQL Injection이 들어올 경우 쿼리문으로 인식하여 보안에 불리하다.
+' '을 붙이면 인식되지 않는 테이블이나 컬럼명을 전달하기 위해 사용한다
+{% endcomment %}
+
+        opts += `<option value="${vals}${id}">`;
+        opts += vals;
+        opts += '</option>';
+    });
+    //console.log(opts);
+
+    // 결합된 option태그들을
+    // select 태그 사이에 삽입함
+    movielist.innerHTML = '';
+    movielist.innerHTML = opts;
+};
+
+sendbtn.addEventListener('click', ()=>{
+    //alert(movielist.value);
+    if (movielist.value == '')
+        alert('영화를 선택하세요!');
+    else {
+        let titles = movielist.value.split(' ')
+
+        movie_title1.value = `${titles[0]} ${titles[1].split('-')[0]}`;
+        document.mtfrm.id.value = titles[titles.length-1];
+
+        //alert(document.mtfrm.id.value);
+
+        // 검색결과 지운후 모달창 닫음
+        movielist.innerHTML = '';
+        title.value = '';
+        bootstrap.Modal.getInstance('#fmmodal').hide();
+    }
+});
+
+</script>
+{% endblock %}

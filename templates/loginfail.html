@@ -1,0 +1,58 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block title %}회원가입 : 가입완료{% endblock %}
+
+{% block style %}
+    <style>
+    .l_order {
+            text-decoration: none;
+            min-width: 59px;
+            height: 40px;
+            padding: 4px 17px 4px 17px;
+            border: 1px solid #fff;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 42px;
+            background-color: #2B2B37;
+            color: #fff;
+            -webkit-transition: all .2s ease-out;
+            transition: all .2s ease-out; }
+
+        .l_order:hover {
+            text-decoration: none;
+            border-color: #bbe309;
+            background-color: #bbe309;
+            color: #2B2B37;
+            font-weight: bold; }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+
+<div id="main">
+    <div>
+        <div class="text-center">
+            <i class="bi bi-x-circle-fill text-warning"
+               style="font-size: 10rem"> </i>
+
+            <div class="display-2 text-white mt-2">
+                <span class="text-primary fw-bold">로그인</span>을
+                    실패하였습니다.</div>
+
+            <div class="text-white fw-bold fs-5 mt-4">
+                아이디와 비밀번호를 다시 한번 확인하셔서
+            로그인 해주세요</div>
+        </div> <!-- // message -->
+
+    </div> <!-- // complete -->
+
+</div> <!-- // main -->
+
+
+{% endblock %}
+
+{% block script%}
+{% endblock %}

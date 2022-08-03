@@ -1,0 +1,46 @@
+<div id="loginmodal" class="fade modal" data-bs-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background: #2B2B37; ">
+            <!-- <div class="modal-header"></div> -->
+            <div class="modal-body">
+                <div class="d-flex justify-content-end">
+                    <button type="button" data-bs-dismiss="modal" class="btn btn-dark" style="background: #2B2B37; border: none"><i class="bi bi-x fs-4"></i></button>
+                </div><!-- 닫기버튼 -->
+                <div class="d-flex justify-content-center">
+                    <form id="loginfrm" name="loginfrm" method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                        <div class="row mb-2">
+                            <div class="col-sm-12">
+                                <label for="userid" class="col-sm-3 col-form-label  fw-bold" style="color: #bbe309;">User ID</label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="text" class="form-control border-dark" id="muserid" name="userid">
+                            </div>
+                        </div>
+                        <div class="row mb-2 mt-4">
+                            <div class="col-sm-12">
+                                <label for="Passwd" class="col-sm-3 col-form-label text-start fw-bold" style="color: #bbe309;">Password</label>
+                                <label for="findpw" class="col-sm-8 text-end">
+                                    <!-- <a href="#" class="fw-bold" style="text-decoration: none; color: #0E9DFB; font-size: 12px;">비밀번호 찾기</a> -->
+                                </label>
+                            </div>
+                            <div class="col-sm-12">
+                                <input type="password" class="form-control border-light" id="mpasswd" name="passwd">
+                            </div>
+                        </div><!-- password -->
+                        <div class="col-sm-12">
+                            <input type="checkbox" class="form-check-input" id="loginstate">
+                            <label class="form-check-label text-light" for="loginstate">로그인 상태 유지</label>
+                        </div>
+                        <div id="error" class="text-danger text-center fw-bold mt-3">{{ error }}</div>
+                        <div class="mt-3 mb-5">
+                            <button type="submit" class="btn fw-bold col-sm-12" style="background: #bbe309; border: #bbe309;" id="loginbtn">Log in</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- <div class="modal-footer justify-content-center"> </div>-->
+        </div>
+    </div>
+</div> <!-- modal -->

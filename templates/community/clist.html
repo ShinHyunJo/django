@@ -1,0 +1,144 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block title %}리뷰 리스트{% endblock %}
+
+{% block style %}
+    <style>
+    /* 페이지네이션 커스텀 */
+        .page-link {
+            color: #ccc;
+            background-color: #2B2B37;
+            border-color: #777;
+        }
+
+        .page-item.active .page-link {
+            z-index: 1;
+            color: #fff;
+            font-weight:bold;
+            background-color: #333;
+            border-color: #777;
+        }
+
+        .page-link:focus, .page-link:hover {
+            color: #ccc;
+            background-color: #222;
+            border-color: #777;
+        }
+
+        a:link { text-decoration: none; }
+        a:visited { text-decoration: none; }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+<div id="main">
+<div class="container">
+    <div class="text-light mb-0"><h4>community</h4></div>
+    <hr class="text-light mb-1">
+    <hr class="text-light mt-0">
+
+    <table class="table text-center table-hover">
+        <thead>
+            <tr class="text-light">
+                <th scope="col">No.</th>
+                <th scope="col">제목</th>
+                <th scope="col">작성자</th>
+                <th scope="col">작성일</th>
+                <th scope="col">조회수</th>
+                <!-- <th scope="col">추천</th>-->
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in crs %}
+            <tr>
+                <th scope="low" class="align-middle text-light">{{ r.id }}</th>
+                <td class="text-start">
+                    <a href="{% url 'review' %}?rno={{ r.id }}"><img src="https://image.tmdb.org/t/p/w500/{{ r.movie.poster_path }}" alt="포스터" width="100"></a>
+                    <div class="post align-middle d-inline-flex p-2">
+                        <span>
+                            <a href="{% url 'review' %}?rno={{ r.id }}">
+                                <span class="text-white-50" style="font-size: 13px;">{{ r.movie.title }}</span><br>
+                                <span class="text-light">{{ r.title }}</span><span class="text-white-50"> ({{ r.comment_set.all|length }})</span></a>
+                        </span>
+                    </div>
+                </td>
+                <td class="align-middle text-light">{{ r.user.userid }}</td>
+                <td class="align-middle text-light">{{ r.regdate|date:'Y-m-d' }}</td>
+                <td class="align-middle text-light">{{ r.views }}</td>
+                <!-- <td class="align-middle text-light"><i class="far fa-thumbs-up text-primary"></i> {{ r.thumbup }}</td> -->
+            </tr> <!-- 게시물 -->
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    <div class="row mb-3">
+        <div class="col-9 d-flex flex-row">
+            <div class="col-2">
+            <select name="findtype" id="findtype" class="form-select findfrm">
+                <option value="title">제 &nbsp; 목</option>
+                <option value="mtitle">영화제목</option>
+                <option value="contents">본 &nbsp; 문</option>
+            </select>&nbsp;
+            </div>
+            <div class="col-4 mx-2">
+                <input type="text" name="findkey" id="findkey" class="form-control findfrm2">&nbsp;
+            </div>
+            <div class="col-4 mx-2">
+                <button type="button" class="btn btn-outline-light text-light" id="findbtn" style="background: #2B2B37; "><i class="bi bi-search"></i> 검색하기</button>
+            </div>
+        </div> <!-- 게시물검색 -->
+        <div class="col-3 text-end">
+            {% if user.is_authenticated %}<a href="{% url 'write' %}" class="btn text-dark btn-outline-light px-4 fw-bold" style="background: #bbe309; border: #bbe309;">리뷰쓰기</a>{% endif %}
+        </div>
+    </div>
+
+    <nav aria-label="reviewboard">
+        <ul class="pagination d-flex justify-content-center mb-5">
+
+            <li class="page-item">
+                <a href="?cpage={{ request.GET.cpage|add:-1 }}&{{ qry }}" class="page-link">&laquo;</a>
+            </li>
+            {% if request.GET.cpage|add:0 > 1 %}
+            <li class="page-item">
+                <a class="page-link" href="?cpage=1&{{ qry }}" aria-label="Previous">
+                <span aria-hidden="true" style="font-size: 12px">처음</span>
+                </a>
+            </li>
+            {% endif %}
+            {% for i in range %}
+            {% if i <= pages %}
+            <li class="page-item {% if i == request.GET.cpage|add:0 %}active{% endif %}"><a class="page-link" href="?cpage={{ i }}&{{ qry }}">{{ i }}</a></li>
+            {% endif %}
+            {% endfor %}
+            <li class="page-item">
+                <a class="page-link" href="?cpage={{ request.GET.cpage|add:1 }}&{{ qry }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav> <!--페이지네이션-->
+</div>  <!-- container -->
+</div> <!-- main -->
+{% endblock %}
+
+{% block script%}
+    <script>
+    const findbtn = document.querySelector('#findbtn');
+    const findtype = document.querySelector('#findtype');
+    const findkey = document.querySelector('#findkey');
+
+    findbtn?.addEventListener('click', () => {
+        if (findkey.value == '') alert('검색할 단어를 입력하세요');
+        else {
+            let qry = '?ftype=' + findtype.value;
+            qry += '&fkey=' + findkey.value;
+            location.href='{% url 'clist' %}' + qry
+        }
+    });
+
+    </script>
+{% endblock %}

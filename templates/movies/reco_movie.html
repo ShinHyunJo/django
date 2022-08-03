@@ -1,0 +1,167 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %}영화 소개 리스트{% endblock %}
+{% block style %}
+    <style>
+        /* 영화 정렬 셀렉터 */
+        .l_order {
+            text-decoration: none;
+            min-width: 59px;
+            height: 40px;
+            padding: 4px 17px 4px 17px;
+            border: 1px solid #fff;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 42px;
+            background-color: #2B2B37;
+            color: #fff;
+            -webkit-transition: all .2s ease-out;
+            transition: all .2s ease-out; }
+
+        .l_order:hover {
+            text-decoration: none;
+            border-color: #bbe309;
+            background-color: #bbe309;
+            color: #2B2B37;
+            font-weight: bold; }
+
+
+        /* 무비카드 */
+
+        .card {
+            position: relative;
+            z-index: 20;
+        }
+
+        .like {
+            position: relative;
+            display: inline-block;
+            text-align: center;
+            top: -200px;
+            z-index: 30;
+            pointer-events: none;
+        }
+
+        .card-title {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            -webkit-line-clamp: 1;
+        }
+
+        .card-img-top {
+            object-fit: cover;
+            width: 100%;
+            height: 430px;
+        }
+
+h1 {
+  height: 100px;
+}
+
+h1 span {
+  position: relative;
+  top: 20px;
+  display: inline-block;
+  animation: bounce .3s ease infinite alternate;
+  font-family: 'Titan One', cursive;
+  font-size: 100px;
+  color: #FFF;
+  text-shadow: 0 1px 0 #CCC,
+               0 2px 0 #CCC,
+               0 3px 0 #CCC,
+               0 4px 0 #CCC,
+               0 5px 0 #CCC,
+               0 6px 0 transparent,
+               0 7px 0 transparent,
+               0 8px 0 transparent,
+               0 9px 0 transparent,
+               0 10px 10px rgba(0, 0, 0, .4);
+}
+
+h1 span:nth-child(2) { animation-delay: .1s; }
+h1 span:nth-child(3) { animation-delay: .2s; }
+h1 span:nth-child(4) { animation-delay: .3s; }
+h1 span:nth-child(5) { animation-delay: .4s; }
+h1 span:nth-child(6) { animation-delay: .5s; }
+h1 span:nth-child(7) { animation-delay: .6s; }
+h1 span:nth-child(8) { animation-delay: .7s; }
+
+@keyframes bounce {
+  100% {
+    top: -20px;
+    text-shadow: 0 1px 0 #CCC,
+                 0 2px 0 #CCC,
+                 0 3px 0 #CCC,
+                 0 4px 0 #CCC,
+                 0 5px 0 #CCC,
+                 0 6px 0 #CCC,
+                 0 7px 0 #CCC,
+                 0 8px 0 #CCC,
+                 0 9px 0 #CCC,
+                 0 50px 25px rgba(0, 0, 0, .2);
+  }
+}
+    </style>
+
+{% endblock %}
+
+{% block content %}
+<div id="main">
+<br>
+<h1 class="text-center">
+  <span>M</span>
+  <span>O</span>
+  <span>V</span>
+  <span>I</span>
+  <span>E</span>
+</h1>
+<br>
+<h4 class="text-center text-white mt-4"> 좋아하는 장르를 선택하시면 영화를 추천해 드립니다 </h4>
+<br>
+<div class="text-center"><a href="{% url 'movies:genre_choice' %}" class="btn text-dark btn-outline-light px-4 fw-bold fs-3" style="background: #bbe309; border: #bbe309;">Start!</a></div>
+<br>
+
+<div class="container">
+    <!-- <div class="text-light">
+        <ul class="trailer_btn">
+            <li><button type="button"><img src="imgs/1.jpg"></button></li>
+            <li><button type="button"><img src="imgs/2.jpg"></button></li>
+            <li><button type="button"><img src="imgs/3.jpg"></button></li>
+            <li><button type="button"><img src="imgs/4.jpg"></button></li>
+        </ul></div>
+    일단 안함-->
+<br>
+    <div class="row">
+        <!-- for 문 시작 -->
+        <div class="col-sm-3">
+            <div class="card card-color" style="width: 18rem; background: #2B2B37; border: #2B2B37">
+                <a href="#"><img src="{% static 'imgs/1.jpg' %}" alt="{{ movie.title }}_poster" class="card-img-top rounded"></a>
+            </div>
+        </div> <!-- 무비카드 -->
+        <!-- for문 끝 -->
+        <div class="col-sm-3">
+            <div class="card card-color" style="width: 18rem; background: #2B2B37; border: #2B2B37">
+                <a href="#"><img src="{% static 'imgs/2.jpg' %}" alt="{{ movie.title }}_poster" class="card-img-top rounded"></a>
+            </div>
+        </div> <!-- 무비카드 -->
+        <div class="col-sm-3">
+            <div class="card card-color" style="width: 18rem; background: #2B2B37; border: #2B2B37">
+                <a href="#"><img src="{% static 'imgs/3.jpg' %}" alt="{{ movie.title }}_poster" class="card-img-top rounded"></a>
+            </div>
+        </div> <!-- 무비카드 -->
+        <div class="col-sm-3">
+            <div class="card card-color" style="width: 18rem; background: #2B2B37; border: #2B2B37">
+                <a href="#"><img src="{% static 'imgs/4.jpg' %}" alt="{{ movie.title }}_poster" class="card-img-top rounded"></a>
+            </div>
+        </div> <!-- 무비카드 -->
+    </div>
+    <br>
+
+    </div>  <!-- container -->
+</div><!-- main  -->
+{% endblock %}
+
+{% block script %}
+{% endblock %}

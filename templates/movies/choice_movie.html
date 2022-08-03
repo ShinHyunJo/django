@@ -1,0 +1,197 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %}영화 소개 리스트{% endblock %}
+{% block style %}
+    <style>
+        /* 영화 정렬 셀렉터 */
+        .l_order {
+            text-decoration: none;
+            min-width: 59px;
+            height: 40px;
+            padding: 4px 17px 4px 17px;
+            border: 1px solid #fff;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 42px;
+            background-color: #2B2B37;
+            color: #fff;
+            -webkit-transition: all .2s ease-out;
+            transition: all .2s ease-out; }
+
+        .l_order:hover {
+            text-decoration: none;
+            border-color: #bbe309;
+            background-color: #bbe309;
+            color: #2B2B37;
+            font-weight: bold; }
+
+
+        /* 무비카드
+
+        .card {
+            position: relative;
+            z-index: 20;
+        }
+
+        .like {
+            position: relative;
+            display: inline-block;
+            text-align: center;
+            top: -200px;
+            z-index: 30;
+            pointer-events: none;
+        }
+
+         */
+
+        .card-title {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            -webkit-line-clamp: 1;
+        }
+
+        .card-img-top {
+            object-fit: cover;
+            width: 100%;
+            height: 430px;
+        }
+
+        .card-body { height: 150px }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+<div id="main">
+<div class="container">
+<form method="post" name="reco" action="{% url 'movies:choice_movie' %}" enctype="multipart/form-data">
+{% csrf_token %}
+<div class="row mt-5 d-flex justify-content-center">
+
+<p class="text-center fs-3 fw-bold lh-1g text-light "> 원하는 장르를 입력하세요 </p>
+<p></p>
+<div class="col-lg-6 text-lg-right text-center">
+
+<input type="checkbox" class="btn-check" id="btncheck1" name="genre" value="12" autocomplete="off">
+<label class="btn btn-outline-warning" for="btncheck1">모험</label> &nbsp;
+
+<input type="checkbox" class="btn-check" id="btncheck2" name="genre" value="14" autocomplete="off">
+<label class="btn btn-outline-warning" for="btncheck2">판타지</label> &nbsp;
+
+<input type="checkbox" class="btn-check" id="btncheck3" name="genre" value="16" autocomplete="off">
+<label class="btn btn-outline-warning" for="btncheck3">애니메이션</label> &nbsp;
+
+<input type="checkbox" class="btn-check" id="btncheck4" name="genre" value="18" autocomplete="off">
+<label class="btn btn-outline-warning" for="btncheck4">드라마</label> &nbsp;
+
+<input type="checkbox" class="btn-check" id="btncheck5" name="genre" value="27" autocomplete="off">
+<label class="btn btn-outline-warning" for="btncheck5">공포</label> &nbsp;
+
+<input type="checkbox" class="btn-check" id="btncheck6" name="genre" value="28" autocomplete="off">
+<label class="btn btn-outline-warning" for="btncheck6">액션</label> &nbsp;
+<br>
+<br>
+<input type="checkbox" class="btn-check" id="btncheck7" name="genre" value="35" autocomplete="off">
+<label class="btn btn-outline-warning" for="btncheck7">코미디</label> &nbsp;
+
+<input type="checkbox" class="btn-check" id="btncheck8" name="genre" value="36" autocomplete="off">
+<label class="btn btn-outline-warning" for="btncheck8">역사</label> &nbsp;
+
+<input type="checkbox" class="btn-check" id="btncheck9" name="genre" value="37" autocomplete="off">
+<label class="btn btn-outline-warning" for="btncheck9">서부</label> &nbsp;
+
+<input type="checkbox" class="btn-check" id="btncheck10" name="genre" value="53" autocomplete="off">
+<label class="btn btn-outline-warning" for="btncheck10">스릴러</label> &nbsp;
+
+<input type="checkbox" class="btn-check" id="btncheck11" name="genre" value="80" autocomplete="off">
+<label class="btn btn-outline-warning" for="btncheck11">범죄</label> &nbsp;
+
+<input type="checkbox" class="btn-check" id="btncheck12" name="genre" value="99" autocomplete="off">
+<label class="btn btn-outline-warning" for="btncheck12">다큐멘터리</label> &nbsp;
+<br>
+<br>
+<input type="checkbox" class="btn-check" id="btncheck13" name="genre" value="878" autocomplete="off">
+<label class="btn btn-outline-warning" for="btncheck13">SF</label> &nbsp;
+
+<input type="checkbox" class="btn-check" id="btncheck14" name="genre" value="9648" autocomplete="off">
+<label class="btn btn-outline-warning" for="btncheck14">미스터리</label> &nbsp;
+
+<input type="checkbox" class="btn-check" id="btncheck15" name="genre" value="10402" autocomplete="off">
+<label class="btn btn-outline-warning" for="btncheck15">음악</label> &nbsp;
+
+<input type="checkbox" class="btn-check" id="btncheck16" name="genre" value="10749" autocomplete="off">
+<label class="btn btn-outline-warning" for="btncheck16">로맨스</label> &nbsp;
+
+<input type="checkbox" class="btn-check" id="btncheck17" name="genre" value="10751" autocomplete="off">
+<label class="btn btn-outline-warning" for="btncheck17">가족</label> &nbsp;
+
+<input type="checkbox" class="btn-check" id="btncheck18" name="genre" value="10752" autocomplete="off">
+<label class="btn btn-outline-warning" for="btncheck18">전쟁</label> &nbsp;
+
+<input type="checkbox" class="btn-check" id="btncheck19" name="genre" value="10770" autocomplete="off">
+<label class="btn btn-outline-warning" for="btncheck19">TV 영화</label> &nbsp;
+
+
+<div class="text-center mt-4 mb-5">
+<button type="submit" class="btn text-dark btn-outline-light px-4 fw-bold fs-3"
+style="background: #bbe309; border: #bbe309;" id="genre_ok">장르 선택</button>
+</div> <!-- 제출버튼 -->
+</div>
+</div>
+</form>
+
+<a class="visually-hidden">{{ genres }}</a>
+
+{% for genre in genres %}
+{% for g in gm %}
+{% if genre == g.id %}
+<a class="l_order">{{ g.name }}</a>
+{% endif %}
+{% endfor %}
+{% endfor %}
+
+<div class="row">
+{% for movie in movies %}
+{% for mgenre in mgenres %}
+{% for genre in genres %}
+{% if movie.id == mgenre.movie_id %}
+{% if genre == mgenre.genre_id %}
+<div class="col-sm-3">
+<div class="card card-color" style="width: 18rem; background: #2B2B37; border: #2B2B37">
+<a href="{% url 'movies:minfo' movie.pk %}"><img src="https://image.tmdb.org/t/p/w500/{{ movie.poster_path }}"
+                                     alt="{{ movie.title }}_poster" class="card-img-top rounded"></a>
+<div class="card-body p-0 mt-2 mb-4">
+<h5 class="card-title fw-bold text-white">{{ movie.title }}</h5>
+<p class="card-text text-white">{{ movie.release_date }}</p>
+<a href="{% url 'movies:minfo' movie.pk %}" class="btn btn-outline-light">자세히보기</a>
+</div>
+</div>
+<!-- <div class="like d-flex justify-content-end pe-4">
+<button class="btn text-white fs-5 me-1 my-2 my-sm-0 input-group-addon" style="border: none" type="submit">
+<i class="bi bi-heart text-white fs-2 fw-bold"></i>
+</button>
+</div> -->
+</div> <!-- 무비카드 -->
+{% endif %}
+{% endif %}
+{% endfor %}
+{% endfor %}
+{% endfor %}
+</div>
+
+</div>  <!-- container -->
+</div><!-- main  -->
+{% endblock %}
+
+{% block script %}
+<script>
+const genre_ok = document.querySelector('#genre_ok');
+    genre_ok.addEventListener('click', ()=>{
+        const frm = document.reco ;
+        frm.submit();
+        console.log(frm);
+    });
+</script>
+{% endblock %}

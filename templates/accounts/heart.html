@@ -1,0 +1,116 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %}영화 소개 리스트{% endblock %}
+{% block style %}
+    <style>
+        /* 영화 정렬 셀렉터 */
+        .l_order {
+            text-decoration: none;
+            min-width: 59px;
+            height: 40px;
+            padding: 4px 17px 4px 17px;
+            border: 1px solid #fff;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 42px;
+            background-color: #2B2B37;
+            color: #fff;
+            -webkit-transition: all .2s ease-out;
+            transition: all .2s ease-out; }
+
+        .l_order:hover {
+            text-decoration: none;
+            border-color: #bbe309;
+            background-color: #bbe309;
+            color: #2B2B37;
+            font-weight: bold; }
+
+
+        /* 무비카드
+
+        .card {
+            position: relative;
+            z-index: 20;
+        }
+
+        .like {
+            position: relative;
+            display: inline-block;
+            text-align: center;
+            top: -200px;
+            z-index: 30;
+            pointer-events: none;
+        }
+
+         */
+
+        .card-title {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            -webkit-line-clamp: 1;
+        }
+
+        .card-img-top {
+            object-fit: cover;
+            width: 100%;
+            height: 430px;
+        }
+
+        .card-body { height: 150px }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+<div id="main">
+    <div class="text-center mt-5">
+        <div class="d-flex justify-content-center">
+            <h4 class="nav-link fw-bold fs-5" style="color: #bbe309">{{ user.userid }}</h4>
+            <p class="text-light">님의 찜목록입니다.</p>
+        </div>
+    </div> <!-- 텍스트 -->
+    <div class="container">
+        <!-- <div class="text-light">
+            <ul class="trailer_btn">
+                <li><button type="button"><img src="imgs/1.jpg"></button></li>
+                <li><button type="button"><img src="imgs/2.jpg"></button></li>
+                <li><button type="button"><img src="imgs/3.jpg"></button></li>
+                <li><button type="button"><img src="imgs/4.jpg"></button></li>
+            </ul></div>
+        일단 안함-->
+
+        <div class="row">
+            <!-- for 문 시작 -->
+            {% for h in heart %}
+        <div class="col-sm-3">
+            <form method="POST" name="delheart" action="{% url 'del_heart' %}">
+            {% csrf_token %}
+            <div class="card card-color" style="width: 18rem; background: #2B2B37; border: #2B2B37">
+                <input type="hidden" name="delimg" value="https://image.tmdb.org/t/p/w500/{{ h.img }}">
+                <a href="#"><img src="https://image.tmdb.org/t/p/w500/{{ h.img }}" alt="포스터" class="card-img-top rounded"></a>
+{#                <a href="#"><img src="{{ h.img }}" alt="포스터" class="card-img-top rounded"></a>#}
+                <div class="card-body p-0 mt-2 mb-4">
+                    <input type="hidden" name="deltitle" value="{{ h.title }}"><h5 class="card-title fw-bold text-white">{{ h.title }}</h5>
+{#                    <h5 class="card-title fw-bold text-white">{{ h.title }}</h5>#}
+                    <input type="hidden" name="deldate" value="{{ h.date }}"><p class="card-text text-white">{{ h.date }}</p>
+                    <a href="#" class="btn btn-outline-light">자세히보기</a>
+                    <input type="submit" value="삭제" class="btn btn-outline-light">
+                </div>
+            </div>
+            </form>
+            <!-- <div class="like d-flex justify-content-end pe-4">
+                <button class="btn text-white fs-5 me-1 my-2 my-sm-0 input-group-addon" style="border: none" type="submit">
+                <i class="bi bi-heart text-white fs-2 fw-bold"></i>
+                </button>
+            </div> -->
+        </div> <!-- 무비카드 -->
+        {% endfor %}
+        </div>
+    </div>  <!-- container -->
+</div><!-- main  -->
+{% endblock %}
+
+{% block script %}
+{% endblock %}

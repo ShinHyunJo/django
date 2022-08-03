@@ -1,0 +1,47 @@
+{% extends 'layouts/base.html' %}
+{% load django_bootstrap5 %}
+{% load static %}
+{#{% block title %} {{ person.username }}'s profile{% endblock title %}#}
+
+
+{% block content %}
+<div id="main">
+<div class="container col-6">
+    <div class="text-center">
+    <hr>
+    <h2 class="fw-bold mt-3 text-start text-success"><span class="fs-1" style="color: #bbe309;">{{ user.userid }}</span>님의 회원정보</h2>
+        <div class="">
+            <div class="text-light mt-5">
+                <div class="row"><label class="col-sm-2 text-start">아이디 :</label> <div class="col-sm-3 text-start">{{ user.username }} </div></div>
+                <div class="row"><label class="col-sm-2 text-start">메일주소 :</label> <div class="col-sm-3 text-start">{{ user.email }} </div></div>
+                <div class="row"><label class="col-sm-2 text-start">가입일 :</label> <div class="col-sm-3 text-start">{{ user.date_joined|date:'Y-m-d H:i:s' }} </div></div>
+                <div class="row"><label class="col-sm-2 text-start">마지막 로그인 :</label> <div class="col-sm-3 text-start">{{ user.last_login|date:'Y-m-d H:i:s' }} </div></div>
+            </div>
+            <!-- <div class="text-end">
+                <button type="button" id="signout" name="sigmout" class="btn border-light text-light"> 탈퇴하기 </button>
+            </div> -->
+        </div>
+
+    <br>
+    <hr class="text-light">
+    <h3 class="text-success text-start fw-bold my-3"><span style="color: #bbe309;" >찜</span>한 영화</h3>
+        <a href="{% url 'heart' %}" class="btn btn-outline-warning" id="heart_ok">찜 목록</a>
+    <hr>
+    </div>
+
+</div>
+</div>
+{% endblock %}
+
+
+{% block script%}
+
+    <script>
+    const heartok = document.querySelector('#heart_ok');
+    heartok.addEventListener('click', () => {
+        location.href = '{% url 'heart' %}';
+    });
+</script>
+
+
+{% endblock %}
