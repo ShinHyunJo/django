@@ -2,6 +2,10 @@
 영화프로젝트  
 2022/07/08 - 최초 푸시  
 2022/07/09 - url연결 및 기초 디자인 작업, 옵션 선택 영화 분류 및 랜덤으로 영화 목록 보여주는 기능 구현
+
+http://52.79.243.129:8000/     aws ec2 서버 업로드
+
+
 ![img2022-07-06-001](https://user-images.githubusercontent.com/103987333/182579364-7bc7a807-b1b0-4875-b0e5-dedd9a24e118.png)
 
 ![img2022-08-03-002](https://user-images.githubusercontent.com/103987333/182579424-7ed9e0d1-389f-4c85-9bb2-fcd2fdf941ed.png)
